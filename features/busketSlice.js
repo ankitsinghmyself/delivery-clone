@@ -12,7 +12,7 @@ export const busketSlice = createSlice({
     },
     removeFromBusket: (state, action) => {
       const index = state.items.findIndex(
-        (busketItem) => busketItem.id === action.payload.id
+        (item) => item.id === action.payload.id
       );
       let newBusket = [...state.items];
       if (index >= 0) {
@@ -27,7 +27,7 @@ export const busketSlice = createSlice({
   },
 });
 
-export const { addToBusket } = busketSlice.actions;
+export const { addToBusket, removeFromBusket } = busketSlice.actions;
 
 export const selectBusketWithId = (state, id) =>
   state.busket.items.filter((item) => item.id === id);

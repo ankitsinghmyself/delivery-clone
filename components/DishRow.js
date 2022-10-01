@@ -8,7 +8,11 @@ import {
   PlusCircleIcon,
 } from 'react-native-heroicons/solid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToBusket, selectBusketWithId } from '../features/busketSlice';
+import {
+  addToBusket,
+  selectBusketWithId,
+  removeFromBusket,
+} from '../features/busketSlice';
 const DishRow = ({ id, title, price, image, short_description }) => {
   const [isPressed, setIsPressed] = useState(false);
   const items = useSelector((state) => selectBusketWithId(state, id));
@@ -23,8 +27,12 @@ const DishRow = ({ id, title, price, image, short_description }) => {
         short_description,
       })
     );
-    console.log(items);
   };
+  const removeItemFromBusket = () => {
+    if (!items.length > 0) return;
+    dispatch(removeFromBusket({ id }));
+  };
+
   return (
     <>
       <TouchableOpacity
@@ -53,7 +61,10 @@ const DishRow = ({ id, title, price, image, short_description }) => {
       {isPressed && (
         <View className="flex flex-row justify-between items-center py-2">
           <View className="flex flex-row items-center">
-            <TouchableOpacity className="bg-gray-100 p-2 rounded-full">
+            <TouchableOpacity
+              onPress={removeItemFromBusket}
+              className="bg-gray-100 p-2 rounded-full"
+            >
               <MinusCircleIcon color="#00ccbb" size="22" />
             </TouchableOpacity>
             <Text>{items.length}</Text>
