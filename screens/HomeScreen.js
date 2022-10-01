@@ -1,12 +1,19 @@
-import { View, Text, SafeAreaView, Image, TextInput, ScrollView } from 'react-native'
-import React, { useEffect, useLayoutEffect } from 'react'
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TextInput,
+  ScrollView,
+} from 'react-native';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   UserIcon,
   ChevronDownIcon,
   AdjustmentsVerticalIcon,
-  MagnifyingGlassIcon
-} from "react-native-heroicons/outline";
+  MagnifyingGlassIcon,
+} from 'react-native-heroicons/outline';
 import Categories from '../components/Categories';
 import FeaturedRow from '../components/FeaturedRow';
 import sanityClient from '../sanity';
@@ -20,25 +27,31 @@ const HomeScreen = () => {
     });
   }, []);
   useEffect(() => {
-    sanityClient.fetch(`*[_type == "featured"]{
+    sanityClient
+      .fetch(
+        `*[_type == "featured"]{
       _id,
       name,
       short_description,
-    }`).then((data) => setFeatured(data));
+    }`
+      )
+      .then((data) => setFeatured(data));
     console.log(featured);
   }, []);
   return (
     <SafeAreaView className="bg-white pt-5">
       {/* Header */}
       <View className="flex-row pb-3 item-center space-x-2 px-4">
-        <Image source={{
-          uri: 'https://links.papareact.com/wru',
-        }}
+        <Image
+          source={{
+            uri: 'https://links.papareact.com/wru',
+          }}
           className="h-7 w-7 bg-gray-300 p-4 rounded-full"
         />
         <View className="flex-1">
           <Text className="font-bold text-gray-400 text-xs">Deliver Now!</Text>
-          <Text className="font-bold text-xl">Current location
+          <Text className="font-bold text-xl">
+            Current location
             <ChevronDownIcon size={20} color="#00CCBB" />
           </Text>
         </View>
@@ -57,14 +70,15 @@ const HomeScreen = () => {
         {/* featured rows */}
         {featured?.map((item) => (
           <FeaturedRow
-          key={item._id} 
-          id={item._id}
-          title={item.name} 
-          description={item.short_description} />
+            key={item._id}
+            id={item._id}
+            title={item.name}
+            description={item.short_description}
+          />
         ))}
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;
