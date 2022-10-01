@@ -9,12 +9,15 @@ const BusketIcon = () => {
   const items = useSelector(selectBusketItems);
   const navigation = useNavigation();
   const total = useSelector(selectBusketTotal);
+  if (items.length === 0) {
+    return null;
+  }
   return (
     <View className="absolute bottom-10 w-full z-50 ">
       <TouchableOpacity
         className="mx-2 flex-row bg-[#00ccbb] p-3 shadow-lg rounded-lg
         justify-between items-center"
-        //   onPress={() => navigation.navigate('BusketScreen')}
+        onPress={() => navigation.navigate('Busket')}
       >
         <Text className="text-white bg-[#01a296] px-2 py-1 font-bold text-lg">
           {items.length}

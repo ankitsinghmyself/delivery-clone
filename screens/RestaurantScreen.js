@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Menu,
 } from 'react-native';
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { urlFor } from '../sanity';
@@ -19,10 +19,13 @@ import {
 } from 'react-native-heroicons/solid';
 import DishRow from '../components/DishRow';
 import BusketIcon from '../components/BusketIcon';
+import { useDispatch } from 'react-redux';
+import { setRestaurant } from '../features/restaurantSlice';
 
 const RestaurantScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const {
     id,
     title,
@@ -41,6 +44,24 @@ const RestaurantScreen = () => {
     navigation.setOptions({
       headerShown: false,
     });
+  }, []);
+  useEffect(() => {
+    dispatch(
+      setRestaurant({
+        id,
+        title,
+        imgUrl,
+        short_description,
+        rating,
+        genre,
+        categories,
+        reviews,
+        address,
+        dishes,
+        long,
+        lat,
+      })
+    );
   }, []);
   return (
     <>
