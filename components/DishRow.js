@@ -65,7 +65,10 @@ const DishRow = ({ id, title, price, image, short_description }) => {
               onPress={removeItemFromBusket}
               className="bg-gray-100 p-2 rounded-full"
             >
-              <MinusCircleIcon color="#00ccbb" size="22" />
+              <MinusCircleIcon
+                color={items.length > 0 ? '#00ccbb' : 'gray'}
+                size="22"
+              />
             </TouchableOpacity>
             <Text>{items.length}</Text>
             <TouchableOpacity
