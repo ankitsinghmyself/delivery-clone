@@ -15,7 +15,11 @@ export default function App() {
           <Stack.Navigator>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Restaurant" component={RestaurantScreen} />
-            <Stack.Screen name="Busket" component={BusketScreen} />
+            <Stack.Screen
+              name="Busket"
+              component={BusketScreen}
+              options={{ presentation: 'modal', headerShown: false }}
+            />
           </Stack.Navigator>
         </TailwindProvider>
       </Provider>
