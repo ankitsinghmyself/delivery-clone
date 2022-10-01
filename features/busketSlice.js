@@ -28,8 +28,10 @@ export const busketSlice = createSlice({
 });
 
 export const { addToBusket, removeFromBusket } = busketSlice.actions;
-
+export const selectBusketItems = (state) => state.busket.items;
 export const selectBusketWithId = (state, id) =>
   state.busket.items.filter((item) => item.id === id);
+export const selectBusketTotal = (state) =>
+  state.busket.items.reduce((total, item) => total + item.price, 0);
 
 export default busketSlice.reducer;

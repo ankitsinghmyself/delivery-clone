@@ -63,6 +63,7 @@ const DishRow = ({ id, title, price, image, short_description }) => {
           <View className="flex flex-row items-center">
             <TouchableOpacity
               onPress={removeItemFromBusket}
+              disabled={!items.length > 0}
               className="bg-gray-100 p-2 rounded-full"
             >
               <MinusCircleIcon
